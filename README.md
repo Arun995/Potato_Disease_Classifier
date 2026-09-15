@@ -179,3 +179,9 @@ http://localhost:8501/v1/models/potatoes_model:predict
 This project is created for educational and demonstration purposes.
 
 The prediction should not be considered a professional agricultural diagnosis.
+
+## Author
+
+Arun Arumugam
+
+AI/ML Engineer | Python | Machine Learning | Deep Learning | NLP | Generative AI | RAG
