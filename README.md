@@ -1,25 +1,181 @@
-# Potato Classifier
+# Potato Disease Classification
 
-## Overview
-The Potato Classifier project is an advanced image classification system designed to identify various types of potatoes. This project employs FastAPI for API management, Docker for containerization, TensorFlow Serving for model serving, Flask for the web framework, and Postman for API testing.
+An AI-powered web application that classifies potato leaf images into:
+
+- Early Blight
+- Late Blight
+- Healthy
 
 ## Features
-- **Image Classification**: Classify images of different types of potatoes.
-- **API Integration**: FastAPI handles requests and responses for classification.
-- **Containerization**: Docker ensures consistent deployment across different environments.
-- **Model Serving**: TensorFlow Serving is used to efficiently serve the machine learning model.
-- **Web Framework**: Flask creates a web interface for interacting with the API.
-- **Testing**: Postman is used to test and validate the API endpoints.
 
-## Technologies Used
-- **FastAPI**: For building and managing the API server.
-- **Docker**: For containerizing the application.
-- **TensorFlow Serving**: For serving the machine learning model.
-- **Flask**: For developing the web framework.
-- **Postman**: For testing the API.
+- Upload a potato leaf image
+- Predict the disease using a CNN model
+- Display the predicted class
+- Display prediction confidence
+- FastAPI backend
+- React frontend
+- Optional TensorFlow Serving support
 
-## Installation
-1. **Clone the Repository**
-   ```bash
-   git clone <repository-url>
-   cd potato-classifier
+## Tech Stack
+
+- Python
+- TensorFlow / Keras
+- FastAPI
+- React
+- TensorFlow Serving
+- Pillow
+- NumPy
+- Docker
+
+## Project Structure
+
+potato-disease/
+│
+├── api/
+│   ├── main.py
+│   ├── main-tf-serving.py
+│   ├── requirements.txt
+│   └── test.py
+│
+├── frontend/
+│   ├── src/
+│   ├── public/
+│   ├── package.json
+│   └── .env
+│
+├── PlantVillage/
+├── saved_models/
+├── potatoes.keras
+├── potatoes.h5
+└── models.config
+
+## Model
+
+The model is a Convolutional Neural Network trained using the PlantVillage potato leaf dataset.
+
+### Training Details
+
+- Image size: 256 × 256
+- Image channels: 3
+- Batch size: 32
+- Epochs: 50
+- Optimizer: Adam
+- Loss function: Sparse Categorical Crossentropy
+- Output activation: Softmax
+- Number of classes: 3
+
+### Classes
+
+1. Early Blight
+2. Late Blight
+3. Healthy
+
+## Model Architecture
+
+The CNN contains:
+
+- Image resizing and rescaling
+- Multiple Conv2D layers
+- ReLU activation
+- MaxPooling2D layers
+- Flatten layer
+- Dense layer
+- Softmax output layer
+
+## Performance
+
+The model achieved approximately 96% accuracy during testing.
+
+The exact accuracy may vary depending on the dataset split, training run, and environment.
+
+## Backend
+
+The backend is developed using FastAPI.
+
+### Run the Backend
+
+cd api
+
+pip install -r requirements.txt
+
+uvicorn main:app --reload
+
+The API will run at:
+
+http://127.0.0.1:8000
+
+### API Endpoints
+
+Health Check:
+
+GET /ping
+
+Prediction:
+
+POST /predict
+
+The /predict endpoint accepts an image file and returns the predicted disease and confidence.
+
+### Example Response
+
+{
+  "class": "Early Blight",
+  "confidence": 0.96
+}
+
+## Frontend
+
+The frontend is developed using React.
+
+### Run the Frontend
+
+cd frontend
+
+npm install
+
+npm start
+
+The frontend will run at:
+
+http://localhost:3000
+
+## Prediction Flow
+
+User uploads image
+        ↓
+React frontend
+        ↓
+FastAPI backend
+        ↓
+TensorFlow/Keras model
+        ↓
+Disease prediction
+        ↓
+Prediction result displayed
+
+## TensorFlow Serving
+
+The project also includes an optional TensorFlow Serving implementation.
+
+TensorFlow Serving can serve the trained model through a REST API.
+
+TensorFlow Serving endpoint:
+
+http://localhost:8501/v1/models/potatoes_model:predict
+
+## Future Improvements
+
+- Improve model accuracy
+- Add more plant diseases
+- Add image validation
+- Add prediction history
+- Add Docker deployment
+- Add cloud deployment
+- Improve frontend design
+- Add model performance monitoring
+
+## Disclaimer
+
+This project is created for educational and demonstration purposes.
+
+The prediction should not be considered a professional agricultural diagnosis.
